@@ -2,7 +2,6 @@ require 'mongo'
 module Mongify
   module Database
   	
-  	puts "tezzt"
     #
     # No Sql Connection configuration
     #
