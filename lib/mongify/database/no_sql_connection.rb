@@ -63,8 +63,7 @@ module Mongify
 
       # Sets up a connection to the database
       def setup_connection_adapter
-        connection = Connection.new(host, port)
-        connection.add_auth(database, username, password) if username && password
+	connection = Mongo::Client.new([ host + ":" + port ], :database => database, :user => username, :password => password)
         connection
       end
 
@@ -79,7 +78,9 @@ module Mongify
 
       # Returns true or false depending if we have a connection to a mongo server
       def has_connection?
-        connection.connected?
+	puts connection.collections
+	connection.cluster.topology.replica_set?
+        #connection.connected?
       end
 
       # Returns the database from the connection
